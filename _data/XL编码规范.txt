@@ -1,0 +1,127 @@
+一，数据库设计  
+        外    键： user_id category_id  
+        字段顺序：id 外键(user_id) 索引(username title(标题)  ) 其他字段(userpwd)   
+        常用字段名： 
+            文章类：
+                id
+                author(作者)  【comefrom】
+                content(文章内容) 
+                remark(备注) 
+                pic(照片)
+
+                status(状态) recommend(推荐) views(访问量)
+                time(除非时间有细分) 
+
+            分类：
+                id
+                name(类名称)
+                description(描述)
+                pic(照片)
+
+二，
+Index: 
+    视图控制器：搭建后台架构  index top left right
+
+    目录结构：
+    |Application  应用
+        |Common 前后应用的公用配置 公用函数库
+        |Admin   
+            |Public 后台的公共 公用头，尾
+    |ThinkPHP 核心库
+    |Public 公用js库，字体库 第三方插件 
+    |Uploads 上传目录 
+        
+    模块划分：模块划分尽量清晰，保证一个控制器拥有增删改查基本操作以及其他附加操作。文章和分类 用户和用户组，一般先开发父类 
+
+    控制器：
+        index 显示列表 （视图控制器） 
+        add  添加（视图控制器）   (满足原则：入口个性化，中间层通用化)
+        addDo 添加处理 （处理控制器）    
+        edit 编辑 （视图控制器）  注意：视图要加隐藏id 
+        edtiDo 编辑处理 （处理控制器）
+        delDo 删除处理 （处理控制器）
+
+        命名空间：  namespace 应用\Controller;
+                    use Think\Controller;
+        CommonController: 用于权限验证，尽量最后编写   _initialize()  
+    视图：
+        index
+        add 
+        edit    比add多了一个 隐藏id。
+
+
+        所有form最好都加上: enctype="multipart/form-data" 
+        
+    常量： 
+        1 --用于URL 模板和控制器里的URL 相对于网站根目录
+        __ROOT__: /xl  
+        __APP__:/xl/index.php     
+        __MODULE__: /xl/index.php/Admin
+
+        2 --用于加载很存储文件 相对于主入口文件
+        APP_PATH: ./Application/  
+        COMMON_PATH: ./Application/Common/
+
+        3 绝对地址
+        THINK_PATH: D:\wamp\www\xl\ThinkPHP/ 
+
+
+        关于路径： 在组合URL时务必注意 '.'的问题，  例如： src='./Public'
+        生成URL为 /xl./Public    
+
+    封装：
+        公用的东西要封装。
+        模型: 
+        1 函数分装 与数据库的无关功能函数  
+            全局函数(Aplication/Common)  
+            应用内部的函数 (Aplication/Admin/Common)
+        2 类封装  与数据库有关的操作 
+            全局模型类 (Aplication/Common/Model)
+
+        控制器：
+        1 单独写一个控制器。 将各种功能集合在一起处理。 例如：Ueditor 控制器
+        详见：clmao源码
+            
+        2 插件形式的封装详见  Ueditor-thinkphp开源项目
+
+        第三方插件：
+        总原则尽量保持插件的独立性，方便更新插件。
+        1 使用自带配置文件。 通过修改配置实现需要的功能。 
+        
+
+
+    命名规范： 面向对象：upFile()  过程式函数： up_file() 
+
+三，操作规范
+    参照在做，编辑在右。
+
+四，错误集锦
+
+condition中最后的一个变量  $plist.id" 错误写法，应该与"之间有空格 即：
+$plist.id"  也可以换一种形式 $plist['id']" 这样就不需要空格了
+<select name='category_id'>
+        <foreach name='plists' item='plist'>
+        <option value ="{$plist.id}" <if condition="$list.category_id eq $plist.id ">selected='selected'</if> >{$plist.name}</option>
+        </foreach>
+</select>     
+
+五，暂放
+model里的类都是与表有关且以表明命名的。
+
+备忘：
+
+设置空操作。
+
+ array('name','require','必须填写名称',0,'unique'),
+
+文件更新时没法删除如何处理。 ueditor 和 thinkphp的解决方案。
+文件上传出错如何处理。
+ueditor有撤销机制，但是如果文件被取消，是否有会将已经上传的文件清除？
+
+没图片也能上传
+
+文件上传如何分类
+
+文章封面图片。
+
+修改密码不能和修改普通信息混在一起，一般是作为一个单独的功能。

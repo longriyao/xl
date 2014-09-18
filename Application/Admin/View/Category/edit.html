@@ -1,0 +1,18 @@
+<include file='Public:header'/>
+<h1>{$title}</h1>
+<hr/>
+
+<form action="__CONTROLLER__/editDo" method="post" accept-charset="utf-8" enctype="multipart/form-data" >
+    分类名称: <input type="text" name="name" value="{$list.name}"><br/>
+    描    述: <input type="text" name="description" value="{$list.description}"><br/>
+    照　　片：<input type="file" name="pic" value="{$list.pic}"/>
+    <!--<div style="width:108px;display:inline-block">-->
+    <div style="width:108px;">
+        <img src="{$list.pic}" alt="" width="100%" name=""/>
+    </div>
+
+<input type="hidden" name="id" value="{$list.id}">
+<p><input type="submit" value="Continue &rarr;"></p>
+</form>
+
+<include file='Public:footer'/>

@@ -1,0 +1,14 @@
+<include file='Public:header'/>
+
+<h1>{$title}</h1>
+<hr/>
+
+<form action="__CONTROLLER__/addDo" method="post" accept-charset="utf-8" enctype="multipart/form-data" >
+    分类名称: <input type="text" name="name" value=""><br/>
+    描　　述: <input type="text" name="description" value=""><br/>
+    照　　片: <input type="file" name="pic" value=""><br/>
+
+<p><input type="submit" value="Continue &rarr;"></p>
+
+</form>
+<include file='Public:footer'/>

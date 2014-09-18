@@ -1,0 +1,25 @@
+<include file='Public:header'/>
+<table border="1">
+    <thead>
+        <tr><th colspan='4'>{$title}</th></tr>
+        <tr>
+            <th>id</th> 
+            <th>name</th> 
+            <th>description</th> 
+            <th>操作</th> 
+        </tr>
+    </thead>
+    <tbody>
+        <foreach name='lists' item='list'>
+        <tr>
+            <td>{$list.id}</td>
+            <td>{$list.name}</td>
+            <td>{$list.description}</td>
+            <td><a href="__CONTROLLER__/edit/id/{$list.id}" title="">编辑</a>\<a href="__CONTROLLER__/delDo/id/{$list.id}" title="">删除</a></td>
+        </tr>
+        </foreach>
+    </tbody>
+</table>
+{$page}
+
+<include file='Public:footer'/>

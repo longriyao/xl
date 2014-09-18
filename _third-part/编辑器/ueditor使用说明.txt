@@ -1,0 +1,32 @@
+前端：
+//加载必要文件：
+    <js href="__PUBLIC__/ueditor/ueditor.config.js" />    
+    <js href="__PUBLIC__/ueditor/ueditor.all.min.js" />
+
+//html结构
+    <script id="editor" name="content" type="text/plain" style="width:1024px;height:500px;">
+    //内容
+    </script>
+
+//实例化
+   <script type="text/javascript">
+        var ue = UE.getEditor('container');
+
+       /* 实例化时可以配置 前端的一些设置。即 config.js内部配置
+        * 也可以直接在config.js里面配置，主要是 向后台提交的路径和一些
+        * 编辑器控件的选用配置
+        var ue = UE.getEditor('container',{
+            UEDITOR_HOME_URL:'__PUBLIC__/ueditor/',
+            serverUrl:'__PUBLIC__/ueditor/' + 'php/controller.php'      
+        });
+       */
+    </script>
+
+后台：	
+默认后台处理(图片和视频的中间处理)： ueitor/php/controller.php
+配置文件： ueditor/php/config.json
+    主要配置 图片 视频等 存放的位置  formPath相对于网站根目录（www）
+//    一般需要修改为 Uploads 目录下
+
+注意：表单提交给addDo操作的数据，一般用 $_POST['content'] 接收。接着进行
+验证，过滤，生成 等操作。

@@ -1,0 +1,32 @@
+<include file='Public:header'/>
+
+<h1>{$title}</h1>
+<hr/>
+
+<form action="__CONTROLLER__/loginDo" method="post" accept-charset="utf-8" enctype="multipart/form-data" >
+    用户名: <input type="text" name="username" value=""><br/>
+    密码: <input type="text" name="userpwd" value=""><br/>
+    验证码: <input type="text" name="verify" value=""><br/>
+
+    <!--1 原始方法-->
+    <!--
+    <img src="__MODULE__/Public/verify" onclick="this.src = this.src+'?'+Math.random() " name=""/>
+    -->
+
+    <!--2 动态生成URL-->
+    <!-- 切记加随机数的工作应该由前端js来完成-->
+    <img src="{:U('Admin/Public/verify')}" onclick="this.src = this.src+'?'+Math.random() "/>
+    
+
+    <!--3 扩展标签法-->
+    <!--
+    <taglib name='Test' />
+    <Test:code width='60' height='70'/>
+    -->
+    
+
+<p><input type="submit" value="登陆">
+<a href="{:U('Login/register')}">注册</a>
+</p>
+</form>
+<include file='Public:footer'/>

@@ -1,0 +1,41 @@
+<include file='Public:header'/>
+
+<h1>{$title}</h1>
+<hr/>
+
+<form action="__CONTROLLER__/editDo" method="post" accept-charset="utf-8" enctype="multipart/form-data" >
+    分    类：
+    <select name='category_id'>
+        <foreach name='plists' item='plist'>
+        <option value ="{$plist.id}" <if condition="$list.category_id eq $plist['id']">selected='selected'</if> >{$plist.name}</option>
+        </foreach>
+    </select>     
+    <br/>
+    文章名称: <input type="text" name="title" value="{$list.title}"><br/>
+    来源: <input type="text" name="comefrom" value="{$list.comefrom}"><br/>
+    推荐： 
+    是 <input type="radio" name="recommend" value="1" <if condition="$list.recommend eq 1">checked</if> />
+        否 <input type="radio" name="recommend" value="0" <if condition="$list.recommend eq 0">checked</if>  /><br/>
+
+    文章内容 
+
+    <script id="editor" name="content" type="text/plain">
+    {$list.content}
+    </script>
+
+    <input type="hidden" name="id" value="{$list.id}"/>
+<p><input type="submit" value="Continue &rarr;"></p>
+
+</form>
+    <js href="__PUBLIC__/ueditor/ueditor.config.js" />    
+    <js href="__PUBLIC__/ueditor/ueditor.all.min.js" />
+    <script type="text/javascript">
+        var ue = UE.getEditor('editor');
+   /*
+       var ue = UE.getEditor('container',{
+        UEDITOR_HOME_URL:'__PUBLIC__/ueditor/',
+        serverUrl:'__PUBLIC__/ueditor/' + 'php/controller.php'      
+       });
+       */
+    </script>
+<include file='Public:footer'/>
